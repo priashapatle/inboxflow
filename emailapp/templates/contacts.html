@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contacts</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+
+    /* SAME THEME */
+    background: linear-gradient(135deg, #6dd5ed, #2193b0);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* MAIN WRAPPER */
+.wrapper {
+    width: 900px;
+    height: 520px;
+
+    display: flex;
+    border-radius: 20px;
+    overflow: hidden;
+
+    box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+}
+
+/* LEFT SIDE */
+.left {
+    width: 55%;
+    padding: 30px;
+
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(18px);
+}
+
+/* TITLE */
+.left h1 {
+    margin: 0;
+    color: #0f172a;
+}
+
+.left p {
+    font-size: 13px;
+    color: #111;
+    margin-bottom: 15px;
+}
+
+/* INPUT */
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+
+    border-radius: 10px;
+    border: none;
+
+    background: rgba(255,255,255,0.9);
+    color: black;
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    padding: 12px;
+
+    border-radius: 12px;
+    border: none;
+
+    background: #0f172a;
+    color: white;
+
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #020617;
+}
+
+/* CONTACT LIST */
+.list {
+    margin-top: 15px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+/* CARD */
+.contact-card {
+    background: rgba(255,255,255,0.8);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+
+    text-align: center;
+    font-size: 13px;
+}
+
+/* RIGHT SIDE */
+.right {
+    width: 45%;
+    position: relative;
+    background: #f8fafc;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CURVE */
+.curve {
+    position: absolute;
+    width: 250px;
+    height: 420px;
+    background: linear-gradient(135deg, #6c63ff, #5f9cff);
+    border-radius: 200px;
+    right: -80px;
+}
+
+/* CONTENT */
+.right-content {
+    text-align: center;
+    z-index: 2;
+}
+
+.right img {
+    width: 120px;
+    margin-bottom: 15px;
+}
+
+.right h2 {
+    color: #111;
+}
+
+.right p {
+    font-size: 13px;
+    color: #555;
+}
+
+/* DEVELOPER CARD */
+.dev {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #333;
+}
+
+/* LINKS */
+.links {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.links a {
+    text-decoration: none;
+    margin: 0 5px;
+    color: #0f172a;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<!-- LEFT -->
+<div class="left">
+
+<h1>Contact Us</h1>
+<p>Add and manage your contacts easily</p>
+
+<form method="POST">
+{% csrf_token %}
+
+<input type="text" name="name" placeholder="Your Name" required>
+<input type="email" name="email" placeholder="Your Email" required>
+
+<button type="submit">+ Add Contact</button>
+
+</form>
+
+<div class="list">
+{% for c in contacts %}
+<div class="contact-card">
+<b>{{ c.name }}</b><br>
+{{ c.email }}
+</div>
+{% endfor %}
+</div>
+
+<div class="links">
+    <a href="/">Send</a> |
+    <a href="/history/">History</a> |
+    <a href="/dashboard/">Dashboard</a> |
+    <a href="/logout/">Logout</a>
+</div>
+
+</div>
+
+<!-- RIGHT -->
+<div class="right">
+
+<div class="curve"></div>
+
+<div class="right-content">
+
+<img src="https://cdn-icons-png.flaticon.com/512/561/561127.png">
+
+<h2>Let's Connect</h2>
+
+<p>
+Manage contacts & send emails faster
+</p>
+
+<div class="dev">
+Developed by: <b>Priasha Patle</b><br>
+priashapatle@gmail.com<br>
+B.Tech CSE
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

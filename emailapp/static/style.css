@@ -1,0 +1,116 @@
+body{
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #6dd5ed, #2193b0);
+
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+
+    background: #22c55e;
+    color: white;
+
+    font-weight: bold;
+}
+
+/* MAIN CARD */
+div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 420px;
+    padding: 30px;
+
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(20px);
+
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+
+    height: auto;
+}
+
+/* HEADING */
+h1{
+    margin-bottom: 20px;
+    color: #0f172a;   /* 🔥 BLACK */
+}
+
+/* LABEL TEXT FIX */
+label, p, small{
+    color: #0f172a;   /* 🔥 BLACK */
+}
+
+/* INPUT */
+input{
+    width: 100%;
+    height: 38px;
+    margin-bottom: 15px;
+
+    border-radius: 10px;
+    border: none;
+    padding: 5px 12px;
+
+    background: rgba(255,255,255,0.9);
+    color: black;
+    font-size: 14px;
+}
+
+/* TEXTAREA */
+textarea{
+    width: 100%;
+    height: 110px;
+    margin-bottom: 15px;
+
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+
+    background: rgba(255,255,255,0.9);
+    color: black;
+}
+
+/* FILE INPUT FIX */
+input[type="file"]{
+    width: 100%;
+    margin-bottom: 20px;
+    color: #0f172a;
+}
+
+/* SUBMIT BUTTON */
+input[type="submit"]{
+    width: 100%;
+    height: 45px;
+
+    background: #0f172a;
+    color: white;
+
+    border: none;
+    border-radius: 12px;
+
+    cursor: pointer;
+    font-weight: bold;
+}
+
+input[type="submit"]:hover{
+    background: #020617;
+}
+
+/* 🔥 IMPORTANT FIX (SPACE ISSUE) */
+form{
+    width: 100%;
+}
+
+/* 🔥 EXTRA SPACE BELOW BUTTON */
+input[type="submit"]{
+    margin-bottom: 10px;
+}

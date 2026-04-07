@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Register</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top, #6ee7f9, #0f172a);
+}
+
+/* Glass Card */
+.container {
+    width: 350px;
+    padding: 40px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    text-align: center;
+    color: white;
+}
+
+/* Title */
+h2 {
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Inputs */
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    margin-top: 5px;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #0f172a;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #020617;
+}
+
+/* Error */
+.error {
+    color: #ff6b6b;
+    margin-bottom: 10px;
+}
+
+/* Links */
+.links {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.links a {
+    color: #67e8f9;
+    text-decoration: none;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Create Account</h2>
+
+{% if error %}
+<div class="error">{{ error }}</div>
+{% endif %}
+
+<form method="POST" action="">
+    {% csrf_token %}
+
+<div class="input-group">
+<label>Username</label>
+<input type="text" name="username" required>
+</div>
+
+<div class="input-group">
+<label>Password</label>
+<input type="password" name="password" required>
+</div>
+
+<button type="submit">REGISTER</button>
+
+</form>
+
+<div class="links">
+<p>Already have account? <a href="/login/">Login</a></p>
+</div>
+
+</div>
+
+</body>
+</html>

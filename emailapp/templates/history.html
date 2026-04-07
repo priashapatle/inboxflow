@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Email History</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+
+    /* 🔥 TEAL BACKGROUND */
+    background: linear-gradient(135deg, #6dd5ed, #2193b0);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* MAIN CARD */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    padding: 25px;
+
+    border-radius: 20px;
+
+    /* 🔥 GLASS EFFECT */
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(18px);
+
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+}
+
+/* HEADER */
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.top h2 {
+    margin: 0;
+    color: #0f172a;
+}
+
+.top a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #0f172a;
+}
+
+/* TABLE */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* HEADER ROW */
+.table th {
+    text-align: left;
+    padding: 14px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 10px;
+    color: #0f172a;
+}
+
+/* DATA ROW */
+.table td {
+    padding: 14px;
+    margin-top: 8px;
+    background: rgba(255,255,255,0.7);
+    color: #111;
+}
+
+/* ROW SPACING */
+.table tr {
+    margin-bottom: 10px;
+}
+
+/* HOVER EFFECT */
+.table tr:hover td {
+    background: rgba(255,255,255,0.9);
+}
+
+/* STATUS BADGE */
+.status {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: white;
+    font-weight: bold;
+}
+
+/* SUCCESS */
+.sent {
+    background: #22c55e;
+}
+
+/* FAILED */
+.failed {
+    background: #ef4444;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .table th, .table td {
+        font-size: 12px;
+        padding: 10px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="top">
+        <h2>📧 Email History</h2>
+        <a href="/">⬅ Back</a>
+    </div>
+
+    <table class="table">
+
+        <tr>
+            <th>To</th>
+            <th>Subject</th>
+            <th>Status</th>
+            <th>Time</th>
+        </tr>
+
+        {% for e in emails %}
+        <tr>
+            <td>{{ e.to }}</td>
+            <td>{{ e.subject }}</td>
+
+            <td>
+                {% if e.status == "Sent" %}
+                    <span class="status sent">Sent</span>
+                {% else %}
+                    <span class="status failed">Failed</span>
+                {% endif %}
+            </td>
+
+            <td>{{ e.created_at }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>

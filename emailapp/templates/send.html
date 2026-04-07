@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Send Email</title>
+
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #6dd5ed, #2193b0);
+}
+
+/* MAIN WRAPPER */
+.wrapper {
+    width: 950px;
+    min-height: 600px; /* 🔥 FIX */
+    display: flex;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+}
+
+/* LEFT SIDE */
+.left {
+    width: 55%;
+    padding: 35px;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(20px);
+}
+
+/* TEXT COLOR FIX */
+.left h1,
+.left p,
+.left label {
+    color: #0f172a; /* 🔥 BLACK TEXT */
+}
+
+.left h1 {
+    margin-bottom: 5px;
+}
+
+.left p {
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+/* INPUT */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 14px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255,255,255,0.9);
+    color: black;
+}
+
+/* EDITOR */
+#editor {
+    height: 120px;
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* FILE INPUT */
+input[type="file"] {
+    background: transparent;
+    color: #0f172a;
+    margin-bottom: 15px;
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background: #0f172a;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px; /* 🔥 spacing fix */
+}
+
+button:hover {
+    background: #020617;
+}
+
+/* LINKS */
+.links {
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+.links a {
+    color: #0f172a;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+/* RIGHT SIDE */
+.right {
+    width: 45%;
+    position: relative;
+    background: #f8f9fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CURVE */
+.curve {
+    position: absolute;
+    width: 300px;
+    height: 500px;
+    background: linear-gradient(135deg, #6c63ff, #5f9cff);
+    border-radius: 200px;
+    right: -100px;
+}
+
+/* CONTENT */
+.right-content {
+    text-align: center;
+    z-index: 2;
+}
+
+.right img {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.right h2 {
+    color: #222;
+}
+
+.right p {
+    font-size: 13px;
+    color: #555;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<!-- LEFT -->
+<div class="left">
+
+<h1>Send Email</h1>
+<p>Send emails easily with attachments and smart suggestions</p>
+
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+<label>To</label>
+<input type="text" name="address" placeholder="Enter email" required>
+
+<label>Subject</label>
+<input type="text" name="subject" id="subject" required>
+
+<label>Message</label>
+<div id="editor"></div>
+<input type="hidden" name="message" id="hiddenMessage">
+
+<label>Attachment</label>
+<input type="file" name="files" multiple>
+
+<!-- 🔥 BUTTON FIXED -->
+<button type="submit">Send Email</button>
+
+</form>
+
+{% if result %}
+    <div class="alert">
+        {{ result }}
+    </div>
+{% endif %}
+
+<div class="links">
+    <a href="/history/">History</a> |
+    <a href="/dashboard/">Dashboard</a> |
+    <a href="/contacts/">Contacts</a> |
+    <a href="/logout/">Logout</a>
+</div>
+
+</div>
+
+<!-- RIGHT -->
+<div class="right">
+
+<div class="curve"></div>
+
+<div class="right-content">
+<img src="https://cdn-icons-png.flaticon.com/512/561/561127.png">
+
+<h2>Let's Talk 📩</h2>
+<p>
+To send emails or communicate quickly,<br>
+use this smart email panel.
+</p>
+</div>
+
+</div>
+
+</div>
+
+<script>
+// QUILL EDITOR
+var quill = new Quill('#editor', {
+    theme: 'snow'
+});
+
+// SEND DATA TO BACKEND
+document.querySelector("form").onsubmit = function() {
+    document.getElementById("hiddenMessage").value = quill.root.innerHTML;
+};
+
+// AI SUBJECT SUGGESTION
+quill.on('text-change', function() {
+    let text = quill.getText().toLowerCase();
+    if(text.includes("leave")){
+        document.getElementById("subject").value = "Leave Request";
+    }
+});
+</script>
+
+</body>
+</html>
